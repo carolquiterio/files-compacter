@@ -19,6 +19,26 @@ public class Arvore
 			incluir(this.Raiz, Novo);
 	}
 
+	private void incluir (No Raiz, No Novo)
+	{
+		if (Novo.getInfo() > Raiz.getInfo())
+		{
+			if (Raiz.getDir() == null)
+				Raiz.setDir(Novo);
+
+			else
+				incluir (Raiz.getDir(), Novo)
+		}
+		else
+		{
+			if (Raiz.getEsq() == null)
+				Raiz.setEsq(Novo);
+
+			else
+				incluir (Raiz.getEsq(), Novo);
+		}
+	}
+
     public int somaValores(){
           return somaTudo(this.Raiz);
     }
