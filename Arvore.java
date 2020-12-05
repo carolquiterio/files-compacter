@@ -6,11 +6,11 @@ public class Arvore
 		return this.Raiz;
 	}
 
-	public void incluir (int Num) {
-		return this.Raiz;
+	public void incluir (char Num, int Qtos) {
+		incluir(new No(Num, Qtos));
 	}
 
-	public void incluir (No Novo) [
+	public void incluir (No Novo) {
 		if (Novo==null) return;
 		if (this.Raiz == null)
 			this.Raiz = Novo;
@@ -27,7 +27,7 @@ public class Arvore
 				Raiz.setDir(Novo);
 
 			else
-				incluir (Raiz.getDir(), Novo)
+				incluir (Raiz.getDir(), Novo);
 		}
 		else
 		{
@@ -43,21 +43,16 @@ public class Arvore
           return somaTudo(this.Raiz);
     }
 
-    private int somaTudo(no Raiz){
+    private int somaTudo(No Raiz){
         if (Raiz==null) return 0;
         if ((Raiz.getEsq()==null) && (Raiz.getDir()==null))  // Folha
-            return Raiz.getInfo();
+            return Raiz.getOcorrencia();
 
         return
                somaTudo(Raiz.getEsq()) +
-               somaTudo(Raiz.getDir()) + Raiz.getInfo();
+               somaTudo(Raiz.getDir()) + Raiz.getOcorrencia();
     }
 
-    public int quantosNosTenho(){
-    }
-
-    private int qtos(No Raiz){   // quantas caixinhas tenho na arvore
-    }
 
     public String toString(){
         return visita(this.Raiz);
