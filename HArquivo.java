@@ -2,14 +2,14 @@ import java.io.*;
 
 public class HArquivo
 {
-	private static ListaSimplesDesordenada<Ocorrencia> oc;
+	private static ListaSimplesOrdenada<Ocorrencia> oc;
 
 	public HArquivo() throws Exception
 	{
-		this.oc = new ListaSimplesDesordenada<Ocorrencia> ();
+		this.oc = new ListaSimplesOrdenada<Ocorrencia> ();
 	}
 
-	public static ListaSimplesDesordenada gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
+	public static ListaSimplesOrdenada gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
 	{
 		FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
 		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
@@ -30,7 +30,7 @@ public class HArquivo
 		{
 			if (contaOcorrencia[i]>0)
 			{
-				oc.insiraNoInicio(new Ocorrencia(((char)i), contaOcorrencia[i]));
+				oc.insira(new Ocorrencia(((char)i), contaOcorrencia[i]));
 			}
 		}
 

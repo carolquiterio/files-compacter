@@ -1,69 +1,69 @@
 public class Arvore
 {
-	private No Raiz;
+	private No raiz;
 
 	public No getRaiz() {
-		return this.Raiz;
+		return this.raiz;
 	}
 
-	public void incluir (char Num, int Qtos) {
-		incluir(new No(Num, Qtos));
+	public void incluir (char car, int qtos) {
+		incluir(new No(new Ocorrencia(car, qtos)));
 	}
 
-	public void incluir (No Novo) {
-		if (Novo==null) return;
-		if (this.Raiz == null)
-			this.Raiz = Novo;
+	public void incluir (No novo) {
+		if (novo==null) return;
+		if (this.raiz == null)
+			this.raiz = novo;
 
 		else
-			incluir(this.Raiz, Novo);
+			incluir(this.raiz, novo);
 	}
 
-	private void incluir (No Raiz, No Novo)
+	private void incluir (No raiz, No novo)
 	{
-		if (Novo.getInfo() > Raiz.getInfo())
+		if (novo.getInfo().getCaracter() > raiz.getInfo().getCaracter())
 		{
-			if (Raiz.getDir() == null)
-				Raiz.setDir(Novo);
+			if (raiz.getDir() == null)
+				raiz.setDir(novo);
 
 			else
-				incluir (Raiz.getDir(), Novo);
+				incluir (raiz.getDir(), novo);
 		}
 		else
 		{
-			if (Raiz.getEsq() == null)
-				Raiz.setEsq(Novo);
+			if (raiz.getEsq() == null)
+				raiz.setEsq(novo);
 
 			else
-				incluir (Raiz.getEsq(), Novo);
+				incluir (raiz.getEsq(), novo);
 		}
 	}
 
     public int somaValores(){
-          return somaTudo(this.Raiz);
+          return somaTudo(this.raiz);
     }
 
-    private int somaTudo(No Raiz){
-        if (Raiz==null) return 0;
-        if ((Raiz.getEsq()==null) && (Raiz.getDir()==null))  // Folha
-            return Raiz.getOcorrencia();
+    private int somaTudo(No raiz){
+        if (raiz==null) return 0;
+        if ((raiz.getEsq()==null) && (raiz.getDir()==null))  // Folha
+            return raiz.getInfo().getQuantos();
 
         return
-               somaTudo(Raiz.getEsq()) +
-               somaTudo(Raiz.getDir()) + Raiz.getOcorrencia();
+               somaTudo(raiz.getEsq()) +
+               somaTudo(raiz.getDir()) + raiz.getInfo().getQuantos();
     }
 
 
     public String toString(){
-        return visita(this.Raiz);
+        return visita(this.raiz);
     }
 
-    private String visita(No Raiz){  // InOrdem
+    private String visita(No raiz){  // InOrdem
 
-         if (Raiz == null) return "";
+         if (raiz == null) return "";
 
-         return visita(Raiz.getEsq()) + " " +
-                Raiz.getInfo() + " " +
-                visita(Raiz.getDir());
+         return visita(raiz.getEsq()) + " " +
+                raiz.getInfo() + " " +
+                visita(raiz.getDir());
     }
 }
