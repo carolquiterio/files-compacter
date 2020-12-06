@@ -1,15 +1,17 @@
 import java.io.*;
+import java.util.List;
+import java.util.*;
 
 public class HArquivo
 {
-	private static ListaSimplesOrdenada<Ocorrencia> oc;
+	private static List<Ocorrencia> oc;
 
 	public HArquivo() throws Exception
 	{
-		this.oc = new ListaSimplesOrdenada<Ocorrencia> ();
+		this.oc = new ArrayList<Ocorrencia> ();
 	}
 
-	public static ListaSimplesOrdenada gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
+	public static List gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
 	{
 		FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
 		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
@@ -30,10 +32,10 @@ public class HArquivo
 		{
 			if (contaOcorrencia[i]>0)
 			{
-				oc.insira(new Ocorrencia(((char)i), contaOcorrencia[i]));
+				oc.add(new Ocorrencia(((char)i), contaOcorrencia[i]));
 			}
 		}
-
+		System.out.println("oii");
 		return oc;
 	}
 }

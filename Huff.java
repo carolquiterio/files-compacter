@@ -5,17 +5,31 @@
 // ESTRUTURA DE DADOS 2
 //
 
+import java.util.List;
+import java.util.*;
+
 public class Huff
 {
 
 	public static void compactar(String arqEntrada, String arqSaida) throws Exception
 	{
-		HArquivo a = new HArquivo(); //leitura do dados
+		HArquivo a = new HArquivo(); //classe com leitura de dados e metodo de gerar tabela de ocorrencia
+		List<Ocorrencia> lista = new ArrayList();
 
-		a.gerarTabelaDeOcorrencia("teste.txt"); //gerar tabela de ocorrencia
+		lista = a.gerarTabelaDeOcorrencia("teste.txt"); //gera a tabela de ocorrencia
+
+		Collections.sort(lista); // ordena a lista
+
+		Arvore ar = new Arvore();
+
+		for(int i=0; i<lista.size();i++)
+		{
+			ar.incluir(lista.get(i).getCaracter(), lista.get(i).getQuantos()); //gera arvore a partir da tabela
+		}
+
+		System.out.println(ar);
 
 
-		//gerar arvore a partir da tabela
 		////////TabelaHuff tabela = Huff.gerarTabela(textoDoArquivo);
 		////////Arvore arvHuff = Huff.geraArvore(tabela);
 
@@ -30,4 +44,5 @@ public class Huff
 	}
 
 	//public String void descompactar ()
+
 }
