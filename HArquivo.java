@@ -4,7 +4,6 @@
 // Estrutura de dados 2
 
 import java.io.*;
-import java.util.List;
 import java.util.*;
 
 public class HArquivo
@@ -16,8 +15,10 @@ public class HArquivo
 		this.oc = new ArrayList ();
 	}
 
-	public static List<Arvore> gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception //
+	public static List<Arvore> gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
 	{
+		// metodo para ler o arquivo e gerar a tabela de ocorrencia
+
 		FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
 		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
 		DataInputStream data = new DataInputStream(buffReader);
@@ -33,15 +34,18 @@ public class HArquivo
 			contaOcorrencia[o]++;
 		}
 
+
 		for (int i=0; i< contaOcorrencia.length; i++)
 		{
 			if (contaOcorrencia[i]>0)
 			{
 				Arvore ar = new Arvore();
-				ar.incluir(((char)i), contaOcorrencia[i]);   // cria um no com cada caracter e sua respectiva ocorrencia
-				oc.add(ar);                                  // insere  essa arvore em uma lista de arvores
+				ar.incluir(new No(((char)i), contaOcorrencia[i]));   // cria um no com cada caracter e sua respectiva ocorrencia
+				oc.add(ar);                                  		 // insere  essa arvore em uma lista de arvores
+
 			}
 		}
+
 		return oc;
 	}
 }

@@ -17,17 +17,20 @@ public class Huff
 		lista = a.gerarTabelaDeOcorrencia("teste.txt"); //gera a tabela de ocorrencia
 
 		Collections.sort(lista); // ordena a lista
-		Collections.reverse(lista);
-
+		Collections.reverse(lista);  //coloca a lista do maior para o menor
+		//System.out.println(lista);
+		System.out.println(lista);
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
 		Arvore ar = new Arvore();
-		int tamanhoDaLista = lista.size();
-		//for(int i=0; i<tamanhoDaLista;i++)
-		//{
-		//	ar.incluir(lista.get(i).getInfo().getCaracter(), lista.get(i).getInfo().getQuantos()); //gera arvore a partir da tabela
-		//}
 
-		int tamanhoDaArvre = ar.quantosNosTenho();
-		//geraCodigoBinario(ar);
+		ar = geraArvore(lista);
+		//System.out.println(lista);
+		System.out.println(ar);
+
+		geraCodigoBinario(ar);
 
 		////////TabelaHuff tabela = Huff.gerarTabela(textoDoArquivo);
 		////////Arvore arvHuff = Huff.geraArvore(tabela);
@@ -44,21 +47,27 @@ public class Huff
 
 	//public String void descompactar ()
 
-	/*private static List<Arvore> geraCodigoBinario(Arvore a)  // usei o tipo ocorrencia pois o caracter continua e o codigo binario e um int
+	private static List<String> geraCodigoBinario(Arvore a)  // usei o tipo ocorrencia pois o caracter continua e o codigo binario e um int
 	{
-		List<Arvore> lista = new ArrayList();
+		List<String> lista = new ArrayList();
 		String codigo = "";
 
-		//while (a.getRaiz().getEsq() != "" && a.getRaiz().getDir() != "")
-		for (int i =0; i< 10; i++)
+		int numeroDeNos = a.quantosNosTenho();
+
+		for (int i =0; i< numeroDeNos; i++ )
 		{
-			System.out.println(a.getRaiz());
-			if(a.getRaiz.getEsq() != null)
-				codigo = cogido + "1";
+			//System.out.println(a.getRaiz());
+
+			if(a.getRaiz().getEsq() != null)
+				codigo = codigo + "1";
+			else if (a.getRaiz().getDir() != null)
+				codigo = codigo + "0";
+
+			lista.add(codigo);
 		}
 
 		return lista;
-	}*/
+	}
 
 	private static Arvore geraArvore(List<Arvore> listaDeArvores)
 	{

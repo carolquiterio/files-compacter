@@ -10,10 +10,6 @@ public class AppHuff {
 		try
 				{
 
-					//HArquivo a = new HArquivo();
-
-					//System.out.println(a.gerarTabelaDeOcorrencia(teste.txt"));
-
 					/*System.out.println("Compactador de arquivos");
 					System.out.println("Digite o numero da ação que deseja realizar");
 					System.out.println("1 - compactar um arquivo");
@@ -21,7 +17,6 @@ public class AppHuff {
 
 					Huff.compactar("teste.txt", "poesia.huf");
 
-					//System.out.println(textoCompactado);
 					//System.out.println("" + Huff.descompactar(textoCompactado));
 
 				}

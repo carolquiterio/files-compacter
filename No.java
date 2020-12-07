@@ -18,6 +18,11 @@ public class No
 		this.Ant = this.Prox = null;
 	}
 
+	public No (char a, int oc)  //segundo construtor para nao ter q criar uma ocorrencia direto
+	{
+		this.info = new Ocorrencia(a, oc);
+	}
+
 	public void setInfo(Ocorrencia I){ this.info = I;}
 
 	public void setDir(No D){ this.Dir = D;}

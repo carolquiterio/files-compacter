@@ -76,9 +76,9 @@ public class Arvore implements Comparable<Arvore>
 
          if (raiz == null) return "";
 
-         return visita(raiz.getEsq()) + " " + "\n" +
+         return visita(raiz.getEsq()) + " " + "\n"+
                 raiz.getInfo() + " " +
-                visita(raiz.getDir()) + "\n";
+                visita(raiz.getDir()) ;
     }
 
 	public int compareTo(Arvore ar) //compareTo para que seja possivel ordernar a lista de arvores (List<Arvore>)
