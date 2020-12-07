@@ -1,4 +1,9 @@
-public class Arvore
+// 19351
+// Carolina Moraes Quiterio
+// Desenvolvimento de sistemas - vespertino
+// Estrutura de dados 2
+
+public class Arvore implements Comparable<Arvore>
 {
 	private No raiz;
 
@@ -53,6 +58,15 @@ public class Arvore
                somaTudo(raiz.getDir()) + raiz.getInfo().getQuantos();
     }
 
+ 	public int quantosNosTenho(){
+         return qtos(this.raiz);
+     }
+
+     private int qtos(No raiz){   // quantas caixinhas tenho na arvore
+         if (raiz == null) return 0;
+
+         return 1  + qtos(raiz.getDir()) + qtos(raiz.getEsq());
+     }
 
     public String toString(){
         return visita(this.raiz);
@@ -62,8 +76,19 @@ public class Arvore
 
          if (raiz == null) return "";
 
-         return visita(raiz.getEsq()) + " " +
+         return visita(raiz.getEsq()) + " " + "\n" +
                 raiz.getInfo() + " " +
-                visita(raiz.getDir());
+                visita(raiz.getDir()) + "\n";
     }
+
+	public int compareTo(Arvore ar) //compareTo para que seja possivel ordernar a lista de arvores (List<Arvore>)
+	{
+    	final int oc  = Integer.compare(this.raiz.getInfo().getQuantos(), ar.getRaiz().getInfo().getQuantos());
+
+    	if(oc != 0 )
+            return oc;
+
+    	return Integer.compare(this.getRaiz().getInfo().getCaracter(), ar.getRaiz().getInfo().getCaracter());
+    }
+
 }

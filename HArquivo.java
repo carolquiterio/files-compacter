@@ -1,17 +1,22 @@
+// 19351
+// Carolina Moraes Quiterio
+// Desenvolvimento de sistemas - vespertino
+// Estrutura de dados 2
+
 import java.io.*;
 import java.util.List;
 import java.util.*;
 
 public class HArquivo
 {
-	private static List<Ocorrencia> oc;
+	private static List<Arvore> oc;
 
 	public HArquivo() throws Exception
 	{
-		this.oc = new ArrayList<Ocorrencia> ();
+		this.oc = new ArrayList ();
 	}
 
-	public static List gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
+	public static List<Arvore> gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception //
 	{
 		FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
 		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
@@ -32,10 +37,11 @@ public class HArquivo
 		{
 			if (contaOcorrencia[i]>0)
 			{
-				oc.add(new Ocorrencia(((char)i), contaOcorrencia[i]));
+				Arvore ar = new Arvore();
+				ar.incluir(((char)i), contaOcorrencia[i]);   // cria um no com cada caracter e sua respectiva ocorrencia
+				oc.add(ar);                                  // insere  essa arvore em uma lista de arvores
 			}
 		}
-		System.out.println("oii");
 		return oc;
 	}
 }

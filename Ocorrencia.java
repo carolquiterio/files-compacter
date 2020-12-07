@@ -1,3 +1,10 @@
+
+
+// 19351
+// Carolina Moraes Quiterio
+// Desenvolvimento de sistemas - vespertino
+// Estrutura de dados 2
+
 public class Ocorrencia implements Comparable<Ocorrencia>
 {
 	private char caracter;

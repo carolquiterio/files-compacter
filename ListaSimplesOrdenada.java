@@ -1,3 +1,8 @@
+// 19351
+// Carolina Moraes Quiterio
+// Desenvolvimento de sistemas - vespertino
+// Estrutura de dados 2
+
 import java.lang.reflect.*;
 
 public class ListaSimplesOrdenada <X extends Comparable<X>>

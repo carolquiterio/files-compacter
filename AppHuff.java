@@ -1,3 +1,8 @@
+// 19351
+// Carolina Moraes Quiterio
+// Desenvolvimento de sistemas - vespertino
+// Estrutura de dados 2
+
 public class AppHuff {
 
 	public static void main (String[] args) {
@@ -7,7 +12,7 @@ public class AppHuff {
 
 					//HArquivo a = new HArquivo();
 
-					//System.out.println(a.gerarTabelaDeOcorrencia("teste.txt"));
+					//System.out.println(a.gerarTabelaDeOcorrencia(teste.txt"));
 
 					/*System.out.println("Compactador de arquivos");
 					System.out.println("Digite o numero da ação que deseja realizar");
