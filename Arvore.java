@@ -3,6 +3,10 @@
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Arvore implements Comparable<Arvore>
 {
 	private No raiz;
@@ -89,6 +93,25 @@ public class Arvore implements Comparable<Arvore>
             return oc;
 
     	return Integer.compare(this.getRaiz().getInfo().getCaracter(), ar.getRaiz().getInfo().getCaracter());
+    }
+    List<No> listaBinario = new ArrayList<No>();
+ 	public List<No> criarBinario(){
+
+        binario(this.raiz,"");
+
+        return listaBinario;
+    }
+
+    private void binario(No raiz, String s){
+
+        if (raiz.getEsq()== null && raiz.getDir() == null) {
+                listaBinario.add(new No(raiz.getInfo().getCaracter(),s));
+                return;
+        }
+		if(raiz.getEsq() != null)
+       		 binario(raiz.getEsq(), s + "0");
+        if(raiz.getDir() != null)
+			binario(raiz.getDir(), s + "1");
     }
 
 }

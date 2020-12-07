@@ -10,6 +10,7 @@ public class No
 	private No Esq, Dir;
 	private No Ant, Prox;
 
+
 	public No(Ocorrencia I)
 	{
 		this.info = I;
@@ -23,19 +24,24 @@ public class No
 		this.info = new Ocorrencia(a, oc);
 	}
 
-	public void setInfo(Ocorrencia I){ this.info = I;}
+	public No (char a, String bin)  //terceiro construtor para criar ocorrencia de binario
+	{
+		this.info = new Ocorrencia(a, bin);
+	}
 
+	public void setInfo(Ocorrencia I){ this.info = I;}
 	public void setDir(No D){ this.Dir = D;}
 	public void setEsq(No E){ this.Esq = E;}
 	public void setAnt(No A){ this.Ant = A;}
 	public void setProx(No P){ this.Prox = P;}
 
 	public Ocorrencia getInfo() { return this.info;}
-
 	public No  getDir() { return this.Dir;}
 	public No  getEsq() { return this.Esq;}
 	public No  getAnt() { return this.Ant;}
 	public No  getProx() { return this.Prox;}
+
+
 
 	public String toString()
 	{

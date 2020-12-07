@@ -18,24 +18,15 @@ public class Huff
 
 		Collections.sort(lista); // ordena a lista
 		Collections.reverse(lista);  //coloca a lista do maior para o menor
-		//System.out.println(lista);
-		System.out.println(lista);
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
 		Arvore ar = new Arvore();
 
-		ar = geraArvore(lista);
-		//System.out.println(lista);
-		System.out.println(ar);
+		ar = geraArvore(lista);  //gera a arvore a partir da lista de arvores
 
-		geraCodigoBinario(ar);
+		//System.out.println(ar);
 
-		////////TabelaHuff tabela = Huff.gerarTabela(textoDoArquivo);
-		////////Arvore arvHuff = Huff.geraArvore(tabela);
+		//geraCodigoBinario(ar); // gera a tabela binaria
 
-
+		List<No> listaBinaria = ar.criarBinario();
 		//gerar estrutura com caracter e seu equivalente (codigos binarios)
 		// tabela de conversao recebendo arvore como parametro
 
@@ -47,27 +38,45 @@ public class Huff
 
 	//public String void descompactar ()
 
-	private static List<String> geraCodigoBinario(Arvore a)  // usei o tipo ocorrencia pois o caracter continua e o codigo binario e um int
+	/*&private static List<No> geraCodigoBinario(Arvore a)
 	{
-		List<String> lista = new ArrayList();
-		String codigo = "";
+
+		List<No> lista = new ArrayList<No>();
 
 		int numeroDeNos = a.quantosNosTenho();
 
-		for (int i =0; i< numeroDeNos; i++ )
+		for (int i = 0; i< numeroDeNos; i++ )
 		{
-			//System.out.println(a.getRaiz());
+ 			if (a.getRaiz().getEsq()== null && a.getRaiz().getDir() == null) {
+                lista.add(new No(a.getRaiz().getInfo().getCaracter(),""));
+
+        	}
 
 			if(a.getRaiz().getEsq() != null)
-				codigo = codigo + "1";
-			else if (a.getRaiz().getDir() != null)
-				codigo = codigo + "0";
+			      geraCodigoBinario(a.getRaiz().getEsq(), "" + "0");
+			if(raiz.getDir() != null)
+				geraCodigoBinario(a.getRaiz().getDir(), "" + "1");
 
-			lista.add(codigo);
+
+			//System.out.println(a.getRaiz().getInfo());
 		}
-
+		//System.out.println(lista);
 		return lista;
-	}
+	}*/
+
+	/*private void binario(NoCharacter raiz,String s){
+
+
+
+        if (raiz.getEsq()== null && raiz.getDir() == null) {
+                listaBinario.add(new NoCharacter(raiz.getCharacter(),s));
+                return;
+        }
+		if(raiz.getEsq() != null)
+       		 Binario(raiz.getEsq(), s + "0");
+        if(raiz.getDir() != null)
+			Binario(raiz.getDir(), s + "1");
+    }*/
 
 	private static Arvore geraArvore(List<Arvore> listaDeArvores)
 	{
@@ -95,7 +104,7 @@ public class Huff
          return listaDeArvores.get(0);
 	}
 
-	private static void escolheUmaDirecao(Arvore f,Arvore ultimo,Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico
+	private static void escolheUmaDirecao(Arvore f, Arvore ultimo, Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico
 	{
 		if(ultimo.getRaiz().getInfo().getCaracter() >= penultimo.getRaiz().getInfo().getCaracter())
         {

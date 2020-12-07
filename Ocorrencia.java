@@ -9,6 +9,7 @@ public class Ocorrencia implements Comparable<Ocorrencia>
 {
 	private char caracter;
 	private int quantos;
+	private String stringBinaria;  //só em algumas ocorrencias (so na ocorrencia para tabela binaria)
 
 	public Ocorrencia(char caracter, int quantos)
 	{
@@ -16,10 +17,15 @@ public class Ocorrencia implements Comparable<Ocorrencia>
 		this.setQuantos(quantos);
 	}
 
-	public Ocorrencia( int quantos)
+	public Ocorrencia(int quantos)
 	{
 		this('\0', quantos);
 	}
+
+    public Ocorrencia(char caracter,String binario){
+        this.caracter = caracter;
+        this.stringBinaria = binario;
+    }
 
 	public char getCaracter ()
 	{
@@ -30,17 +36,19 @@ public class Ocorrencia implements Comparable<Ocorrencia>
 	{
 		return this.quantos;
 	}
+	public String getStringBinaria() { return this.stringBinaria;}
 
 	public void setCaracter (char caracter)
 	{
 		this.caracter = caracter;
 	}
 
-
 	public void setQuantos (int quantos)
 	{
 		this.quantos = quantos;
 	}
+
+	public void setStringBinaria(String s) {this.stringBinaria = s;}
 
 	public String toString()
 	{
