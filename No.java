@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 // 19351
 // Carolina Moraes Quiterio
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
-public class No
+public class No implements Serializable
 {
 	private Ocorrencia info;
 

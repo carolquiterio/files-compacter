@@ -1,20 +1,24 @@
+import java.util.List;
+import java.util.*;
+import java.io.*;
+
 // 19351
 // Carolina Moraes Quiterio
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
-import java.util.List;
-import java.util.*;
-
 public class Huff
 {
+	private static BitSet elementoBitSet;
+	private static List<No> listaBinaria;
+	private static HArquivo arq;
 
 	public static void compactar(String arqEntrada, String arqSaida) throws Exception
 	{
-		HArquivo a = new HArquivo(); //classe com leitura de dados e metodo de gerar tabela de ocorrencia
+		arq = new HArquivo(); //classe com leitura de dados e metodo de gerar tabela de ocorrencia
 		List<Arvore> lista = new ArrayList();
 
-		lista = a.gerarTabelaDeOcorrencia("teste.txt"); //gera a tabela de ocorrencia
+		lista = arq.gerarTabelaDeOcorrencia("teste.txt"); //gera a tabela de ocorrencia
 
 		Collections.sort(lista); // ordena a lista
 		Collections.reverse(lista);  //coloca a lista do maior para o menor
@@ -22,61 +26,21 @@ public class Huff
 
 		ar = geraArvore(lista);  //gera a arvore a partir da lista de arvores
 
-		//System.out.println(ar);
+		listaBinaria = ar.criarBinario(); //gerar estrutura com caracter e seu equivalente (codigos binarios)
 
-		//geraCodigoBinario(ar); /
+		//chamaBitSetECompacta();
+  			 ObjectOutputStream outputStream = null;
+        outputStream = new ObjectOutputStream(new FileOutputStream("saida.huf"));
 
-		List<No> listaBinaria = ar.criarBinario();// gera a tabela binaria
-		//gerar estrutura com caracter e seu equivalente (codigos binarios)
-		// tabela de conversao recebendo arvore como parametro
-
-
+		//System.out.println(arq.getVetByte());
+		//arq.geraArquivoDeSaida(arqSaida, elementoBitSet);
+		arq.geraArquivoECompacta(outputStream, listaBinaria, ar );
 		//releitura do texto convertendo pra codigo binario utilizando o bitset
 		// e gerar o arquivo final (meuTexto, arqSaida, tabelaBinaria)
 		///////// gerarArquivoCompactado(meutexto, tabelaConv, arqSaida)
 	}
 
-	//public String void descompactar ()
 
-	/*&private static List<No> geraCodigoBinario(Arvore a)
-	{
-
-		List<No> lista = new ArrayList<No>();
-
-		int numeroDeNos = a.quantosNosTenho();
-
-		for (int i = 0; i< numeroDeNos; i++ )
-		{
- 			if (a.getRaiz().getEsq()== null && a.getRaiz().getDir() == null) {
-                lista.add(new No(a.getRaiz().getInfo().getCaracter(),""));
-
-        	}
-
-			if(a.getRaiz().getEsq() != null)
-			      geraCodigoBinario(a.getRaiz().getEsq(), "" + "0");
-			if(raiz.getDir() != null)
-				geraCodigoBinario(a.getRaiz().getDir(), "" + "1");
-
-
-			//System.out.println(a.getRaiz().getInfo());
-		}
-		//System.out.println(lista);
-		return lista;
-	}*/
-
-	/*private void binario(NoCharacter raiz,String s){
-
-
-
-        if (raiz.getEsq()== null && raiz.getDir() == null) {
-                listaBinario.add(new NoCharacter(raiz.getCharacter(),s));
-                return;
-        }
-		if(raiz.getEsq() != null)
-       		 Binario(raiz.getEsq(), s + "0");
-        if(raiz.getDir() != null)
-			Binario(raiz.getDir(), s + "1");
-    }*/
 
 	private static Arvore geraArvore(List<Arvore> listaDeArvores)
 	{
@@ -130,4 +94,72 @@ public class Huff
         }
     }
 
+	private static void chamaBitSetECompacta()
+	{
+		elementoBitSet = new BitSet();
+
+ 		int cont = 0;
+        for (char c : new String(arq.getVetByte()).toCharArray())
+        {
+            for(int i = 0; i < listaBinaria.size(); i++)
+            {
+                if(c == listaBinaria.get(i).getInfo().getCaracter())
+                {
+                    String stringBin = listaBinaria.get(i).getInfo().getStringBinaria();
+
+                	for(int j = 0; j < stringBin.length(); j++)
+                	{
+                        if(stringBin.charAt(j) == '1')
+                        {
+                            elementoBitSet.set(cont);
+                        }
+                 		cont++;
+                	}
+                }
+            }
+        }
+        System.out.println(elementoBitSet);
+	}
 }
+
+//public String void descompactar ()
+
+	/*&private static List<No> geraCodigoBinario(Arvore a)
+	{
+
+		List<No> lista = new ArrayList<No>();
+
+		int numeroDeNos = a.quantosNosTenho();
+
+		for (int i = 0; i< numeroDeNos; i++ )
+		{
+ 			if (a.getRaiz().getEsq()== null && a.getRaiz().getDir() == null) {
+                lista.add(new No(a.getRaiz().getInfo().getCaracter(),""));
+
+        	}
+
+			if(a.getRaiz().getEsq() != null)
+			      geraCodigoBinario(a.getRaiz().getEsq(), "" + "0");
+			if(raiz.getDir() != null)
+				geraCodigoBinario(a.getRaiz().getDir(), "" + "1");
+
+
+			//System.out.println(a.getRaiz().getInfo());
+		}
+		//System.out.println(lista);
+		return lista;
+	}*/
+
+	/*private void binario(NoCharacter raiz,String s){
+
+
+
+        if (raiz.getEsq()== null && raiz.getDir() == null) {
+                listaBinario.add(new NoCharacter(raiz.getCharacter(),s));
+                return;
+        }
+		if(raiz.getEsq() != null)
+       		 Binario(raiz.getEsq(), s + "0");
+        if(raiz.getDir() != null)
+			Binario(raiz.getDir(), s + "1");
+    }*/

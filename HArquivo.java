@@ -11,6 +11,11 @@ public class HArquivo
 	private static List<Arvore> oc;
 	private static byte vetByte[];
 
+	public byte[] getVetByte()
+	{
+		return this.vetByte;
+	}
+
 	public HArquivo() throws Exception
 	{
 		this.oc = new ArrayList ();
@@ -50,7 +55,7 @@ public class HArquivo
 		return oc;
 	}
 
-	public static void geraArquivoDeSaida(String nomeDoArquivoDeSaida, BitSet codigoBit) throws FileNotFoundException
+	/*public static void geraArquivoDeSaida(String nomeDoArquivoDeSaida, BitSet codigoBit) throws FileNotFoundException
 	{
 		try
 		{
@@ -64,5 +69,47 @@ public class HArquivo
         }
 
 
-	}
+	}*/
+  public static void geraArquivoECompacta(ObjectOutputStream outputStream,List<No> listaBinaria,Arvore arvorePrincipal)
+  {
+
+        try {
+                 outputStream.writeObject(arvorePrincipal.getRaiz());
+            } catch (IOException e) {
+                 e.printStackTrace();
+            }
+        int cont = 0;
+
+         BitSet codigoBit = new BitSet();
+        for (char c : new String(vetByte).toCharArray())
+        {
+
+            for(int i = 0; i < listaBinaria.size(); i++)
+            {
+
+                if(c == listaBinaria.get(i).getInfo().getCaracter())
+                {
+                    String caracterBinario = listaBinaria.get(i).getInfo().getStringBinaria();
+
+                	 for(int j = 0; j < caracterBinario.length(); j++)
+                	 {
+                            if(caracterBinario.charAt(j) == '1')
+                            {
+                                    codigoBit.set(cont);
+                            }
+                 		cont++;
+                	 }
+
+                }
+            }
+        }
+            System.out.println(codigoBit);
+                        try {
+                        //ESCREVE ESSE BIT DENTRO DO DOCUMENTO DESTINO
+                        outputStream.writeObject(codigoBit);
+                        } catch (IOException e) {
+                         e.printStackTrace();
+                        }
+
+    }
 }

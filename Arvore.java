@@ -1,11 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 // 19351
 // Carolina Moraes Quiterio
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Arvore implements Comparable<Arvore>
 {

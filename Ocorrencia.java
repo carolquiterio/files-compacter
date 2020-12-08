@@ -1,11 +1,11 @@
-
+import java.io.Serializable;
 
 // 19351
 // Carolina Moraes Quiterio
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
-public class Ocorrencia implements Comparable<Ocorrencia>
+public class Ocorrencia implements Comparable<Ocorrencia>, Serializable
 {
 	private char caracter;
 	private int quantos;
