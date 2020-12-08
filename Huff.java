@@ -74,7 +74,7 @@ public class Huff
          return listaDeArvores.get(0);
 	}
 
-	private static void escolheUmaDirecao(Arvore arv, Arvore ultimo, Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico
+	private static void escolheUmaDirecao(Arvore arv, Arvore ultimo, Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico (esq,dir)
 	{
 		if(ultimo.getRaiz().getInfo().getCaracter() >= penultimo.getRaiz().getInfo().getCaracter())
         {

@@ -10,7 +10,7 @@ public class AppHuff {
 		try
 		{
 			Huff.compactar("teste.txt", "novo.huf");
-			//Huff.descsadasompactar("novo.huf", "descompactado.txt");
+			//Huff.descompactar("novo.huf", "descompactado.txt");
 
 		}
 

@@ -50,7 +50,7 @@ public class HArquivo
 		return oc;
 	}
 
-	/*public static void geraArquivoDeSaida(String nomeDoArquivoDeSaida, BitSet codigoBit) throws FileNotFoundException
+	/*public static void geraArquivoDeSaida(String nomeDoArquivoDeSaida, BitSet codigoBit) throws FileNotFoundException  //decidi não gerar aqui o arquivo
 	{
 		try
 		{
@@ -70,24 +70,23 @@ public class HArquivo
 	{
 		try
 		{
-			outputStream.writeObject(arvorePrincipal.getRaiz());
+			outputStream.writeObject(arvorePrincipal.getRaiz());  // para usar o bitset
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        int cont = 0;
 
-        BitSet codigoBit = new BitSet();
+        int cont = 0;
+        BitSet codigoBit = new BitSet();  //uso do bitset
+
         for (char c : new String(vetByte).toCharArray())
         {
-
             for(int i = 0; i < listaBinaria.size(); i++)
             {
-
-                if(c == listaBinaria.get(i).getInfo().getCaracter())
+                if(c == listaBinaria.get(i).getInfo().getCaracter())            // se o o caracter for igual o caracter da lista de nos binarios
                 {
-                    String caracterBinario = listaBinaria.get(i).getInfo().getStringBinaria();
+                    String caracterBinario = listaBinaria.get(i).getInfo().getStringBinaria();  //string rotativa (vai sempre sendo instanciada novamente)
 
                 	 for(int j = 0; j < caracterBinario.length(); j++)
                 	 {
@@ -95,9 +94,8 @@ public class HArquivo
                             {
                                     codigoBit.set(cont);
                             }
-                 		cont++;
+                 		cont++;                                  //aumenta indeendente do if
                 	 }
-
                 }
             }
         }
