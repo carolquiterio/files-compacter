@@ -1,14 +1,15 @@
+import java.io.*;
+import java.util.*;
+
 // 19351
 // Carolina Moraes Quiterio
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
-import java.io.*;
-import java.util.*;
-
 public class HArquivo
 {
 	private static List<Arvore> oc;
+	private static byte vetByte[];
 
 	public HArquivo() throws Exception
 	{
@@ -23,7 +24,7 @@ public class HArquivo
 		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
 		DataInputStream data = new DataInputStream(buffReader);
 
-		byte vetByte[];
+
 		vetByte = new byte[arquivoFisico.available()];
 		data.read(vetByte);
 
@@ -47,5 +48,21 @@ public class HArquivo
 		}
 
 		return oc;
+	}
+
+	public static void geraArquivoDeSaida(String nomeDoArquivoDeSaida, BitSet codigoBit) throws FileNotFoundException
+	{
+		try
+		{
+			ObjectOutputStream outputStream = null;
+        	outputStream = new ObjectOutputStream(new FileOutputStream(nomeDoArquivoDeSaida));
+			outputStream.writeObject(codigoBit);
+		}
+		catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
 	}
 }

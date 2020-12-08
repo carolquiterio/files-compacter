@@ -24,9 +24,9 @@ public class Huff
 
 		//System.out.println(ar);
 
-		//geraCodigoBinario(ar); // gera a tabela binaria
+		//geraCodigoBinario(ar); /
 
-		List<No> listaBinaria = ar.criarBinario();
+		List<No> listaBinaria = ar.criarBinario();// gera a tabela binaria
 		//gerar estrutura com caracter e seu equivalente (codigos binarios)
 		// tabela de conversao recebendo arvore como parametro
 

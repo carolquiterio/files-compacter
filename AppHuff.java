@@ -15,7 +15,7 @@ public class AppHuff {
 					System.out.println("1 - compactar um arquivo");
 					System.out.println("2 - descompactar um arquivo");*/
 
-					Huff.compactar("teste.txt", "poesia.huf");
+					Huff.compactar("teste.txt", "saida.txt");
 
 					//System.out.println("" + Huff.descompactar(textoCompactado));
 
