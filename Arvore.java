@@ -9,6 +9,7 @@ import java.util.List;
 public class Arvore implements Comparable<Arvore>
 {
 	private No raiz;
+    List<No> listaBinario = new ArrayList<No>();
 
 	public No getRaiz() {
 		return this.raiz;
@@ -93,22 +94,26 @@ public class Arvore implements Comparable<Arvore>
 
     	return Integer.compare(this.getRaiz().getInfo().getCaracter(), ar.getRaiz().getInfo().getCaracter());
     }
-    List<No> listaBinario = new ArrayList<No>();
- 	public List<No> criarBinario(){
 
+ 	public List<No> criarBinario()
+ 	{
+		//utiliza recusão para fazer a lista com os nos com o caracter e o seu respectivo binario
         binario(this.raiz,"");
 
         return listaBinario;
     }
 
-    private void binario(No raiz, String s){
-
+    private void binario(No raiz, String s)
+    {
+		//utiliza recusão para fazer a lista com os nos com o caracter e o seu respectivo binario
         if (raiz.getEsq()== null && raiz.getDir() == null) {
                 listaBinario.add(new No(raiz.getInfo().getCaracter(),s));
                 return;
         }
+
 		if(raiz.getEsq() != null)
        		 binario(raiz.getEsq(), s + "0");
+
         if(raiz.getDir() != null)
 			binario(raiz.getDir(), s + "1");
     }

@@ -9,28 +9,23 @@ import java.util.*;
 public class HArquivo
 {
 	private static List<Arvore> oc;
-	private static byte vetByte[];
 
-	public byte[] getVetByte()
-	{
-		return this.vetByte;
-	}
 
 	public HArquivo() throws Exception
 	{
 		this.oc = new ArrayList ();
 	}
 
-	public static List<Arvore> gerarTabelaDeOcorrencia(String nomeDoArquivo) throws Exception
+	public static List<Arvore> gerarTabelaDeOcorrencia(DataInputStream data, byte[] vetByte) throws Exception
 	{
 		// metodo para ler o arquivo e gerar a tabela de ocorrencia
 
-		FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
-		BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
-		DataInputStream data = new DataInputStream(buffReader);
+		//FileInputStream arquivoFisico = new FileInputStream(nomeDoArquivo);
+		//BufferedInputStream buffReader = new BufferedInputStream(arquivoFisico);
+		//DataInputStream data = new DataInputStream(buffReader);
 
 
-		vetByte = new byte[arquivoFisico.available()];
+		//byte[] vetByte = new byte[arquivoFisico.available()];
 		data.read(vetByte);
 
 		int contaOcorrencia[] = new int[32000];
@@ -70,17 +65,20 @@ public class HArquivo
 
 
 	}*/
-  public static void geraArquivoECompacta(ObjectOutputStream outputStream,List<No> listaBinaria,Arvore arvorePrincipal)
-  {
 
-        try {
-                 outputStream.writeObject(arvorePrincipal.getRaiz());
-            } catch (IOException e) {
-                 e.printStackTrace();
-            }
+	public static void geraArquivoECompacta(ObjectOutputStream outputStream,List<No> listaBinaria,Arvore arvorePrincipal, byte[] vetByte)
+	{
+		try
+		{
+			outputStream.writeObject(arvorePrincipal.getRaiz());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         int cont = 0;
 
-         BitSet codigoBit = new BitSet();
+        BitSet codigoBit = new BitSet();
         for (char c : new String(vetByte).toCharArray())
         {
 
@@ -103,13 +101,14 @@ public class HArquivo
                 }
             }
         }
-            System.out.println(codigoBit);
-                        try {
-                        //ESCREVE ESSE BIT DENTRO DO DOCUMENTO DESTINO
-                        outputStream.writeObject(codigoBit);
-                        } catch (IOException e) {
-                         e.printStackTrace();
-                        }
 
+        try
+        {
+            outputStream.writeObject(codigoBit);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

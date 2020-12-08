@@ -24,6 +24,8 @@ public class No implements Serializable
 	public No (char a, int oc)  //segundo construtor para nao ter q criar uma ocorrencia direto
 	{
 		this.info = new Ocorrencia(a, oc);
+		this.Esq = this.Dir = null;
+		this.Ant = this.Prox = null;
 	}
 
 	public No (char a, String bin)  //terceiro construtor para criar ocorrencia de binario

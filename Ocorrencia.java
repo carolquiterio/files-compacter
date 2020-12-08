@@ -5,7 +5,7 @@ import java.io.Serializable;
 // Desenvolvimento de sistemas - vespertino
 // Estrutura de dados 2
 
-public class Ocorrencia implements Comparable<Ocorrencia>, Serializable
+public class Ocorrencia implements Comparable<Ocorrencia>, Serializable //se não for seraliazabel da erro!
 {
 	private char caracter;
 	private int quantos;
@@ -54,12 +54,12 @@ public class Ocorrencia implements Comparable<Ocorrencia>, Serializable
 	{
 		String ret = "";
 
-		ret = "Quantos: " + this.quantos + "   Caracter: " + this.caracter;
+		ret = "Quantos: " + this.quantos + "   Caracter: " + this.caracter + "binario:" + this.stringBinaria ;
 
 		return ret;
 	}
 
-	public int compareTo(Ocorrencia oc)
+	public int compareTo(Ocorrencia oc)  //é preciso ter
     {
 		if (this.quantos < oc.quantos)
 			return -666;

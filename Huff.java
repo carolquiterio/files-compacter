@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.*;
 import java.io.*;
 
@@ -10,15 +9,28 @@ import java.io.*;
 public class Huff
 {
 	private static BitSet elementoBitSet;
-	private static List<No> listaBinaria;
 	private static HArquivo arq;
 
 	public static void compactar(String arqEntrada, String arqSaida) throws Exception
 	{
+		FileInputStream     arquivoFisico;
+        BufferedInputStream buffReader;
+        DataInputStream     data;
+
+        arquivoFisico = new FileInputStream("teste.txt");
+        buffReader = new BufferedInputStream(arquivoFisico);
+        data = new DataInputStream(buffReader);
+
+        byte vetByte[];
+        vetByte = new byte[arquivoFisico.available()];
+        int[] ocorrencias = new int[100000];
+
+		List<No> listaBinaria;
+
 		arq = new HArquivo(); //classe com leitura de dados e metodo de gerar tabela de ocorrencia
 		List<Arvore> lista = new ArrayList();
 
-		lista = arq.gerarTabelaDeOcorrencia("teste.txt"); //gera a tabela de ocorrencia
+		lista = arq.gerarTabelaDeOcorrencia(data, vetByte); //gera a tabela de ocorrencia
 
 		Collections.sort(lista); // ordena a lista
 		Collections.reverse(lista);  //coloca a lista do maior para o menor
@@ -28,37 +40,31 @@ public class Huff
 
 		listaBinaria = ar.criarBinario(); //gerar estrutura com caracter e seu equivalente (codigos binarios)
 
-		//chamaBitSetECompacta();
-  			 ObjectOutputStream outputStream = null;
-        outputStream = new ObjectOutputStream(new FileOutputStream("saida.huf"));
+  		ObjectOutputStream outputStream = null;
+        outputStream = new ObjectOutputStream(new FileOutputStream(arqSaida));  //cria um arquivo para passar de paraetro e colocar o texto compactado
 
-		//System.out.println(arq.getVetByte());
-		//arq.geraArquivoDeSaida(arqSaida, elementoBitSet);
-		arq.geraArquivoECompacta(outputStream, listaBinaria, ar );
-		//releitura do texto convertendo pra codigo binario utilizando o bitset
-		// e gerar o arquivo final (meuTexto, arqSaida, tabelaBinaria)
-		///////// gerarArquivoCompactado(meutexto, tabelaConv, arqSaida)
+
+		arq.geraArquivoECompacta(outputStream, listaBinaria, ar, vetByte ); // gerar o arquivo final
+
 	}
 
-
-
-	private static Arvore geraArvore(List<Arvore> listaDeArvores)
+	private static Arvore geraArvore(List<Arvore> listaDeArvores)  //gera a estrutura da arvore
 	{
 		while (listaDeArvores.size() > 1)
 		{
-            Arvore ultima = listaDeArvores.get(listaDeArvores.size()-1);  //guardo o ultimo e o penultimo elemento
+            Arvore ultima = listaDeArvores.get(listaDeArvores.size()-1);
             listaDeArvores.remove(listaDeArvores.size()-1);
 
-            Arvore penultimo = listaDeArvores.get(listaDeArvores.size()-1);
+            Arvore penultimo = listaDeArvores.get(listaDeArvores.size()-1);          //guardo o ultimo e o penultimo elemento
             listaDeArvores.remove(listaDeArvores.size()-1);
 
-            int soma = ultima.getRaiz().getInfo().getQuantos() + penultimo.getRaiz().getInfo().getQuantos();
+            int soma = ultima.getRaiz().getInfo().getQuantos() + penultimo.getRaiz().getInfo().getQuantos(); //guarda a soma da ocorrencia para gerar um no com folhas
 
             Arvore aux = new Arvore();
 
-            aux.incluir(' ',soma);
+            aux.incluir(' ',soma);   //inclui na arvore auxilia um no com apenas a soma (nos q nao sao folhas)
 
-            escolheUmaDirecao(aux, ultima, penultimo);
+            escolheUmaDirecao(aux, ultima, penultimo);  //define se é pra criar um novo no na dir esq ou nao
 
             listaDeArvores.add(aux);
             Collections.sort(listaDeArvores);
@@ -68,98 +74,62 @@ public class Huff
          return listaDeArvores.get(0);
 	}
 
-	private static void escolheUmaDirecao(Arvore f, Arvore ultimo, Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico
+	private static void escolheUmaDirecao(Arvore arv, Arvore ultimo, Arvore penultimo) //seta a direcao certa para ser usada em cada caso especifico
 	{
 		if(ultimo.getRaiz().getInfo().getCaracter() >= penultimo.getRaiz().getInfo().getCaracter())
         {
-            f.getRaiz().setDir(ultimo.getRaiz());
-            f.getRaiz().setEsq(penultimo.getRaiz());
-
+            arv.getRaiz().setDir(ultimo.getRaiz());
+            arv.getRaiz().setEsq(penultimo.getRaiz());
         }
         else if(ultimo.getRaiz().getInfo().getCaracter() <= penultimo.getRaiz().getInfo().getCaracter())
         {
-            f.getRaiz().setEsq(ultimo.getRaiz());
-            f.getRaiz().setDir(penultimo.getRaiz());
-
+            arv.getRaiz().setEsq(ultimo.getRaiz());
+            arv.getRaiz().setDir(penultimo.getRaiz());
         }
         else if(ultimo.getRaiz().getInfo().getQuantos() >= penultimo.getRaiz().getInfo().getQuantos())
         {
-            f.getRaiz().setDir(ultimo.getRaiz());
-            f.getRaiz().setEsq(penultimo.getRaiz());
+            arv.getRaiz().setDir(ultimo.getRaiz());
+            arv.getRaiz().setEsq(penultimo.getRaiz());
         }
         else if(ultimo.getRaiz().getInfo().getQuantos() <= penultimo.getRaiz().getInfo().getQuantos())
         {
-            f.getRaiz().setEsq(ultimo.getRaiz());
-            f.getRaiz().setDir(penultimo.getRaiz());
+            arv.getRaiz().setEsq(ultimo.getRaiz());
+            arv.getRaiz().setDir(penultimo.getRaiz());
         }
     }
-
-	private static void chamaBitSetECompacta()
-	{
-		elementoBitSet = new BitSet();
-
- 		int cont = 0;
-        for (char c : new String(arq.getVetByte()).toCharArray())
-        {
-            for(int i = 0; i < listaBinaria.size(); i++)
-            {
-                if(c == listaBinaria.get(i).getInfo().getCaracter())
-                {
-                    String stringBin = listaBinaria.get(i).getInfo().getStringBinaria();
-
-                	for(int j = 0; j < stringBin.length(); j++)
-                	{
-                        if(stringBin.charAt(j) == '1')
-                        {
-                            elementoBitSet.set(cont);
-                        }
-                 		cont++;
-                	}
-                }
-            }
-        }
-        System.out.println(elementoBitSet);
-	}
 }
 
-//public String void descompactar ()
-
-	/*&private static List<No> geraCodigoBinario(Arvore a)
+///////////////////////////////////////////////TENTANDO DESCOMPACTAR////////////////////////////////////////////////////
+/*
+	public static void descompactar(String nome, String nomeDestino) throws Exception
 	{
-
-		List<No> lista = new ArrayList<No>();
-
-		int numeroDeNos = a.quantosNosTenho();
-
-		for (int i = 0; i< numeroDeNos; i++ )
-		{
- 			if (a.getRaiz().getEsq()== null && a.getRaiz().getDir() == null) {
-                lista.add(new No(a.getRaiz().getInfo().getCaracter(),""));
-
-        	}
-
-			if(a.getRaiz().getEsq() != null)
-			      geraCodigoBinario(a.getRaiz().getEsq(), "" + "0");
-			if(raiz.getDir() != null)
-				geraCodigoBinario(a.getRaiz().getDir(), "" + "1");
+		FileInputStream arquivo = new FileInputStream(nome);
 
 
-			//System.out.println(a.getRaiz().getInfo());
-		}
-		//System.out.println(lista);
-		return lista;
-	}*/
+            StringBuilder s = new StringBuilder();
+}
 
-	/*private void binario(NoCharacter raiz,String s){
+  private static String descompactaComRecursao(No raiz,String binario){
+      return  desc(raiz, binario, "");                                  //para usar em cada parte especifica
+    }
 
+      private static String desc(No raiz, String binario, String frase)
+      {
 
+        No aux = raiz;
+        for(int i = 0; i < binario.length();i++){
+            if(binario.charAt(i) == '0')
+                aux = aux.getEsq();
 
-        if (raiz.getEsq()== null && raiz.getDir() == null) {
-                listaBinario.add(new NoCharacter(raiz.getCharacter(),s));
-                return;
+            if(binario.charAt(i) == '1'){
+                aux =  aux.getDir();
+            }
+            if(aux.getDir() == null && aux.getEsq() == null){
+                frase += aux.getInfo().getCaracter();
+                aux = raiz;
+            }
+
         }
-		if(raiz.getEsq() != null)
-       		 Binario(raiz.getEsq(), s + "0");
-        if(raiz.getDir() != null)
-			Binario(raiz.getDir(), s + "1");
-    }*/
+        return frase;
+	}
+	*/
